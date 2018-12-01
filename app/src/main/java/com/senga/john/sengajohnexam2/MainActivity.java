@@ -61,9 +61,10 @@ public class MainActivity extends AppCompatActivity {
         try{
             fin = new FileInputStream(file);
             while((c=fin.read()) != -1){
-//                buffer.append((char)c);
+                if(Character.isDigit((char)c))
+                    buffer.append((char)c);
             }
-//            ave.setText(buffer.toString());
+            ave.setText(buffer.toString());
         }
         catch(Exception e){
             Toast.makeText(this, "Error reading", Toast.LENGTH_LONG).show();
