@@ -19,6 +19,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        setTitle("Practical Exam 2");
+
         fname = findViewById(R.id.fname);
         lname = findViewById(R.id.lname);
         exam1 = findViewById(R.id.exam1);
