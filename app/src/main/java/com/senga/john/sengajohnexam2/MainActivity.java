@@ -8,6 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
 public class MainActivity extends AppCompatActivity {
@@ -30,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         String lastName = lname.getText().toString();
         int examGrade1 = Integer.parseInt(exam1.getText().toString());
         int examGrade2 = Integer.parseInt(exam2.getText().toString());
-        int aveGrade = (examGrade1+examGrade2)/2;
+        String aveGrade = (examGrade1+examGrade2)/2+"";
 
         File folder = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
         File file = new File(folder, "external.txt");
@@ -39,11 +40,33 @@ public class MainActivity extends AppCompatActivity {
         try{
             fos = new FileOutputStream(file);
             fos.write(firstName.getBytes());
+            fos.write(lastName.getBytes());
+            fos.write(aveGrade.getBytes());
             Toast.makeText(this, "Data saved in sd card", Toast.LENGTH_LONG).show();
             fos.close();
+
+            showAve();
         }
         catch(Exception e){
             Toast.makeText(this, "Error writing on sd card", Toast.LENGTH_LONG).show();
+        }
+    }
+
+    public void showAve(){
+        File folder = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS);
+        File file = new File(folder, "external.txt");
+        FileInputStream fin = null;
+        int c;
+        StringBuffer buffer = new StringBuffer();
+        try{
+            fin = new FileInputStream(file);
+            while((c=fin.read()) != -1){
+//                buffer.append((char)c);
+            }
+//            ave.setText(buffer.toString());
+        }
+        catch(Exception e){
+            Toast.makeText(this, "Error reading", Toast.LENGTH_LONG).show();
         }
     }
 }
